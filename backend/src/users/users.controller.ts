@@ -30,7 +30,7 @@ export class UsersController {
   @Patch(':id')
   @Roles(Role.ADMIN)
   @ApiOperation({ summary: 'Update user (Admin only)' })
-  update(@Param('id') id: string, @Body() data: { name?: string; role?: string; department?: string }) {
-    return this.usersService.update(id, data);
+  update(@Param('id') id: string, @Body() data: { name?: string; role?: Role; department?: string }) {
+    return this.usersService.update(id, data as any);
   }
 }
