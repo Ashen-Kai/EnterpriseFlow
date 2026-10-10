@@ -111,16 +111,7 @@ export class InventoryService {
     const cached = await this.redis.getJson(cacheKey);
     if (cached) return cached;
 
-    const items = await this.prisma.inventoryItem.findMany({
-      where: {
-        isDeleted: false,
-        quantity: { lte: this.prisma.inventoryItem.fields?.reorderLevel as any },
-      },
-      include: { supplier: { select: { id: true, name: true } } },
-      orderBy: { quantity: 'asc' },
-    });
-
-    // Use raw query for the self-referencing comparison
+    // Use raw query for the self-referencing comparison (quantity <= reorderLevel)
     const lowStockItems = await this.prisma.$queryRaw`
       SELECT i.*, s.name as "supplierName"
       FROM inventory_items i

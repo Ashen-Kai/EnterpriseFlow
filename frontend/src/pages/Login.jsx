@@ -72,7 +72,7 @@ export default function Login() {
           </button>
         </form>
 
-        <div style={{ marginTop: '24px', padding: '16px', background: 'rgba(79, 110, 247, 0.06)', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(79, 110, 247, 0.1)' }}>
+        <div style={{ marginTop: '24px', padding: '16px', background: '#f4f5f7', borderRadius: 'var(--radius-sm)', border: '1px solid #e2e5ea' }}>
           <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '8px', fontWeight: 600 }}>Demo Credentials</p>
           <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', lineHeight: 1.8 }}>
             <div><strong>Admin:</strong> admin@enterprise.com / admin123</div>

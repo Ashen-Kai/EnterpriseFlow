@@ -99,10 +99,7 @@ export class ReportingService {
     ] = await Promise.all([
       this.prisma.inventoryItem.count({ where: { isDeleted: false } }),
       this.prisma.$queryRaw`SELECT COUNT(*) as count FROM inventory_items WHERE "isDeleted" = false AND quantity <= "reorderLevel"` as Promise<any>,
-      this.prisma.inventoryItem.aggregate({
-        where: { isDeleted: false },
-        _sum: { unitPrice: true },
-      }),
+      this.prisma.$queryRaw`SELECT COALESCE(SUM(quantity * "unitPrice"), 0) as total FROM inventory_items WHERE "isDeleted" = false` as Promise<any>,
       this.prisma.purchaseOrder.count({ where: { status: 'PENDING' } }),
       this.prisma.purchaseOrder.count(),
       this.prisma.employee.count(),
@@ -124,7 +121,7 @@ export class ReportingService {
       inventory: {
         totalItems: totalInventoryItems,
         lowStockCount: Number(lowStockCount?.[0]?.count || 0),
-        totalValue: totalInventoryValue._sum.unitPrice || 0,
+        totalValue: Number(totalInventoryValue?.[0]?.total || 0),
       },
       procurement: {
         pendingOrders,

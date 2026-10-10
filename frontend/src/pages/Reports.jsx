@@ -137,7 +137,7 @@ export default function Reports() {
           </div>
           <div className="card-body">
             <pre style={{
-              background: 'var(--bg-input)',
+              background: '#f4f5f7',
               padding: 20,
               borderRadius: 'var(--radius-sm)',
               fontSize: '0.8125rem',
@@ -145,6 +145,7 @@ export default function Reports() {
               overflow: 'auto',
               maxHeight: 400,
               lineHeight: 1.6,
+              border: '1px solid #e2e5ea',
             }}>
               {JSON.stringify(selectedReport.data, null, 2)}
             </pre>
