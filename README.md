@@ -181,7 +181,7 @@ npm run db:seed
 Runs both backend and frontend concurrently:
 
 ```bash
-npm run dev
+npm run start:dev
 ```
 
 | Service      | URL                                  |
